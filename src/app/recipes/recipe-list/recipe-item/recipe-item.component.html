@@ -1,0 +1,13 @@
+<div class="row border">
+    <div class="col-20 ">
+        <a  href="#" class="list-group-item  clearfix" (click)="onSelected()">
+            <div class="float-start ">
+            <h5 class="list-group-item-heading pt-3 fs-5">{{recipe.name}}</h5>
+            <p class="list-group-item-text fs-6">{{recipe.description}}</p>
+            </div>
+            <span class="float-end">
+            <img class="list-group-item img-responsive pt-3" src="{{recipe.imagePath}}" width="60px" alt="{{recipe.name}}">
+            </span>
+        </a>    
+    </div>
+</div>
