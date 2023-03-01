@@ -1,9 +1,12 @@
-import { EventEmitter } from "@angular/core";
+import {  EventEmitter, Injectable, Output } from "@angular/core";
+import { Subject } from "rxjs";
 import { Ingredients } from "../ingredients/ingredients.model";
+import { ShoppingListService } from "../shopping-list/shopping-list.service";
 import { Recipe } from "./recipe.model";
 
+@Injectable()
 export class RecipeService{
-    recipeSelected= new EventEmitter<Recipe>();
+ restore= new Subject<Recipe[]>() 
     private recipes:Recipe[]=[
         new Recipe('Desert',
         'Custard' ,
@@ -27,8 +30,28 @@ export class RecipeService{
             new Ingredients('Wheat flour',1)
         ]),
     ];
+    constructor(private slService : ShoppingListService){}
+    setRecipes(recipes:Recipe[]){
+        this.recipes=recipes;
+        console.log(this.recipes)
+        this.restore.next(this.recipes)
+    }
     
     getRecipes(){
-        return this.recipes.slice();
+        return this.recipes;
+    }
+
+    getRecipe(index:number){
+        return this.recipes[index];
+    }
+    addIngredientsToShoppingList(ingredients:Ingredients[]){
+        this.slService.addExtraIngredients(ingredients)
+    }
+    deleteContact(index:number){
+        this.recipes.splice(index, 1);
+        this.restore.next(this.recipes.slice());
+        // this.getRecipes()
+        alert("Recipe Removed Successfully")
+       
     }
 }

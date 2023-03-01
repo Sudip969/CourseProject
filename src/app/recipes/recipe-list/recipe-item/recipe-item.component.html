@@ -1,6 +1,8 @@
 <div class="row border">
     <div class="col-20 ">
-        <a  href="#" class="list-group-item  clearfix" (click)="onSelected()">
+        <a  style="cursor: pointer;"
+        [routerLink]="[index]" 
+        routerLinkActive="active"class="list-group-item  clearfix">
             <div class="float-start ">
             <h5 class="list-group-item-heading pt-3 fs-5">{{recipe.name}}</h5>
             <p class="list-group-item-text fs-6">{{recipe.description}}</p>
